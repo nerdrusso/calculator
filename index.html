@@ -1,0 +1,277 @@
+<div id="hh">
+    
+<div id="jj">
+    <div id="dd">
+  <input type="text" id="age" name="age" oninput="evalu()">
+</div>
+  <div id="disp">0</div>
+    <div id="vv"> 
+         <div id="del">
+             <img src="https://cdn-icons-png.flaticon.com/512/4194/4194617.png" alt="backspace" id="bs" onclick="delee()">
+         </div>
+     </div>
+  
+  
+</div>
+
+<div id="gridview">
+  <!-- items will be added here procedurally -->
+</div>
+</div>
+<style>
+    #bs{
+        width: 3.7vh;
+        height: 3.7vh;
+        margin-right: 4vh;
+        margin-bottom: 3vh;
+    }
+    #del{
+    
+      
+    }
+    #disp{
+      color: #444;
+      text-align: right;
+      margin-right: 2vh;
+      margin-bottom: 4vh;
+      font-size: 4vh;
+      
+    }
+    #dd{
+     width: 100%;
+    height: 100%;
+    padding-right: 3vh;
+    padding-top: 3vh;
+    box-sizing: border-box;
+    }
+    #age{
+   max-width: 100%;
+   
+//  direction: rtl;
+
+  font-size: 5.5vh;
+  color: white;
+  border: none;
+ // outline: none;
+  background-color: transparent;
+
+text-align: right;
+    }
+    
+    #vv{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        border-bottom: 2px solid #2e2e2e;
+       
+    }
+    #hh{
+        height: 100%;
+    }
+    #jj{
+        height: 35%;
+        //background-color: grey;
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+    }
+#gridview {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  grid-gap: 0vh;
+  padding: 1vh;
+  padding-top: 4vh;
+}
+
+*{
+   // outline: 1px solid red;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (max-width: 800px) {
+  #gridview {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  }
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: #000;
+    overflow-y: hidden;
+}
+.gridview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.gridview-item a {
+  color: white;
+  text-decoration: none;
+  margin-bottom: 3vh;
+  font-size: 4.3vh;
+}
+
+.gridview-item a:hover {
+  text-decoration: underline;
+}
+.gridview-item h {
+  width: 5vh;
+  height: 5vh;
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  align-text: center;
+  display: flex;
+  align-items: center;
+justify-content: center;
+}
+.gridview-item div {
+  box-sizing: border-box;
+  width: 10.5vh;
+  height: 10.5vh;
+  margin-bottom: -1.2vh;
+  border-radius: 50%;
+  background-color: #171717;
+  position: relative;
+  align-text: center;
+  
+}
+
+</style>
+
+<script>
+    function reve(str) { 
+    return (str === '') ? '' : reve(str.substr(1)) + str.charAt(0); 
+    } 
+    
+    
+const gridview = document.getElementById('gridview');
+
+const items = [
+  {
+    iconUrl: 'C',
+    },
+  {
+    iconUrl: '()',
+    },
+  {
+    iconUrl: '%',
+    },
+    {
+    iconUrl: '/',
+  },
+    {
+    iconUrl: '7',
+     },
+    {
+    iconUrl: '8',
+    },
+     {
+    iconUrl: '9',
+    },
+     {
+    iconUrl: '*',
+    },
+     {
+    iconUrl: '4',
+    },
+     {
+    iconUrl: '5',
+    },
+     {
+    iconUrl: '6',
+    },
+     {
+    iconUrl: '-',
+    },
+     {
+    iconUrl: '1',
+    },
+     {
+    iconUrl: '2',
+    },
+     {
+    iconUrl: '3',
+    },
+     {
+    iconUrl: '+',
+    },
+     {
+    iconUrl: '+/-',
+    },
+     {
+    iconUrl: '0',
+    },
+     {
+    iconUrl: '.',
+    },
+     {
+    iconUrl: '=',
+    },
+  // Add more items here
+];
+
+for (const item of items) {
+  const itemElement = document.createElement('div');
+  itemElement.classList.add('gridview-item');
+
+  const linkElement = document.createElement('a');
+  
+const bgElement = document.createElement('div');
+
+  const iconElement = document.createElement('h');
+  iconElement.textContent = item.iconUrl;
+
+
+bgElement.appendChild(iconElement);
+ linkElement.appendChild(bgElement);
+  
+
+  itemElement.appendChild(linkElement);
+  gridview.appendChild(itemElement);
+ 
+let = document.getElementById('age');
+  bgElement.addEventListener('click', () => {
+age.value = age.value + bgElement.textContent;
+    
+evalu()
+ });
+
+
+
+}
+
+function validateNumber(input) {
+  input.value = input.value.replace(/[^\d]*([+\-*/^()%.])[^\d]*/g, "$1");
+     
+}
+
+
+function evalu() {
+ try{ validateNumber(document.getElementById('age'));
+  const expression = document.getElementById('age').value;
+  const result = eval(expression);
+  document.getElementById('disp').innerHTML = result;
+
+if (document.getElementById('disp').innerHTML  === "undefined"){
+    document.getElementById('disp').innerHTML = "";
+}
+ } catch(error){
+      //jdjdk
+  }
+}
+
+function delee() {
+    const inputt = document.getElementById('age');
+
+inputt.value = inputt.value.substring(0, inputt.value.length - 1);
+evalu()
+
+}
+</script>
